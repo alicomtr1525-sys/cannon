@@ -1,5 +1,7 @@
 # Cannon: Android Launcherının Görünümü İos a Taşındı (Trebuchet İn Görünümü)
 
+# Türkçe
+
 Trebuchet tarzı yukarı kaydırmalı uygulama çekmecesi.
 App Library yerinde kalır, çekmece ayrıca eklenir.
 
@@ -16,6 +18,10 @@ Ana Ekranda, Yukarı Kaydır Bütün Uygulamalarınızı Görüceksiniz Aşağı
 - Rootless jailbreak (palera1n rootless veya Dopamine)
 - arm64 cihaz (A8-A11, örneğin iPhone 7). A12 ve üstü (arm64e) cihazlar şu an desteklenmiyor.
 - iOS 15 hedeflenmiştir. iOS 16 ve üstü henüz tam denenmedi.
+
+## Birde
+
+Jond-ie tarafından yapılan Catapult projesinden ilham alın mıştır İşte Onunda Linki Burda: https://github.com/Jond-ie/catapult
 
 ---
 
@@ -42,3 +48,6 @@ Referenced from the LineageOS Trebuchet `lineage-20.0` source (Apache 2.0): 4 co
 - A rootless jailbreak (palera1n rootless or Dopamine)
 - An arm64 device (A8-A11, for example iPhone 7). A12 and newer (arm64e) devices are not supported right now.
 - iOS 15 is the target. iOS 16 and newer have not been fully tested yet.
+
+## Also
+It was inspired by the Catapult project By Jond-ie Here İs The Link Of The Catapult Project: https://github.com/Jond-ie/catapult
