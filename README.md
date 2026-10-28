@@ -13,7 +13,9 @@ Ana Ekranda, Yukarı Kaydır Bütün Uygulamalarınızı Görüceksiniz Aşağı
 4 sütun, ikon 60, yazı 14, hücre yüksekliği 104, hücre aralığı 16, arama alanı 48 yükseklik ve hap şekli.
 
 ## Gereksinimler
-Dopamine Rootless Jailbreak (Veya Herhangi Bir Rootless Jailbreak) Minimum: İos 15 Max:ios 18 (Daha Tam Denenmedi)
+- Rootless jailbreak (palera1n rootless veya Dopamine)
+- arm64 cihaz (A8-A11, örneğin iPhone 7). A12 ve üstü (arm64e) cihazlar şu an desteklenmiyor.
+- iOS 15 hedeflenmiştir. iOS 16 ve üstü henüz tam denenmedi.
 
 ---
 
@@ -36,3 +38,7 @@ Early release (v0.0.1), not fully tested on a device yet. To try the first build
 Referenced from the LineageOS Trebuchet `lineage-20.0` source (Apache 2.0): 4 columns, icon size 60, label size 14, cell height 104, cell spacing 16, a 48-high pill-shaped search field.
 
 ## Requirements
+
+- A rootless jailbreak (palera1n rootless or Dopamine)
+- An arm64 device (A8-A11, for example iPhone 7). A12 and newer (arm64e) devices are not supported right now.
+- iOS 15 is the target. iOS 16 and newer have not been fully tested yet.
