@@ -22,6 +22,7 @@ Ana Ekranda, Yukarı Kaydır Bütün Uygulamalarınızı Görüceksiniz Aşağı
 ## Birde
 
 Jond-ie tarafından yapılan Catapult projesinden ilham alın mıştır İşte Onunda Linki Burda: https://github.com/Jond-ie/catapult
+
 bu projeyi kendimi test etmek için yaptım (ve Claude u)
 
 ---
@@ -52,4 +53,5 @@ Referenced from the LineageOS Trebuchet `lineage-20.0` source (Apache 2.0): 4 co
 
 ## Also
 It was inspired by the Catapult project By Jond-ie Here İs The Link Of The Catapult Project: https://github.com/Jond-ie/catapult
+
 I created this project to test myself (and claude).
