@@ -1,0 +1,9 @@
+Package: com.ali.cannon
+Name: Cannon
+Depends: mobilesubstrate (>= 0.9.5000)
+Version: 0.0.1
+Architecture: iphoneos-arm64
+Description: Trebuchet-style swipe-up app drawer for the iOS 15 home screen
+Maintainer: Ali
+Author: Ali
+Section: Tweaks
