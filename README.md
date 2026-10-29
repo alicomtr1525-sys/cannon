@@ -22,7 +22,7 @@ Ana Ekranda, Yukarı Kaydır Bütün Uygulamalarınızı Görüceksiniz Aşağı
 
 - bu projeyi kendimi test etmek için yaptım (ve Claude u)
 
-- eğer bir türk genci isen bu proje beleş ve banka hesabım olmadığı için asla paralı olmayacak olsada beleş kalıcaktı zaten
+- eğer bir türk genci isen bu proje beleş ve banka hesabım yok asla paralı olmayacak olsada beleş kalıcaktı zaten
 
 ---
 
