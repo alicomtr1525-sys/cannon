@@ -5,9 +5,6 @@
 Trebuchet tarzı yukarı kaydırmalı uygulama çekmecesi.
 App Library yerinde kalır, çekmece ayrıca eklenir.
 
-## İlk Sürümü Denemek İçin
-Actions Sekmesine Bakabilirsiniz
-
 ## Nasıl Kullanılır
 Ana Ekranda, Yukarı Kaydır Bütün Uygulamalarınızı Görüceksiniz Aşağı Kaydırın Ve Menü Gidecek Ve Ana Sayfanız İle Başbaşa Kalacaksınız
 
@@ -21,19 +18,17 @@ Ana Ekranda, Yukarı Kaydır Bütün Uygulamalarınızı Görüceksiniz Aşağı
 
 ## Birde
 
-Jond-ie tarafından yapılan Catapult projesinden ilham alın mıştır İşte Onunda Linki Burda: https://github.com/Jond-ie/catapult
+- Jond-ie tarafından yapılan Catapult projesinden ilham alın mıştır İşte Onunda Linki Burda: https://github.com/Jond-ie/catapult
 
-bu projeyi kendimi test etmek için yaptım (ve Claude u)
+- bu projeyi kendimi test etmek için yaptım (ve Claude u)
+
+- eğer bir türk genci isen bu proje beleş ve banka hesabım olmadığı için asla paralı olmayacak olsada beleş kalıcaktı zaten
 
 ---
 
 # English
 
 Cannon brings the look of the Android launcher (LineageOS Trebuchet) to iOS. First piece: a Trebuchet-style swipe-up app drawer. The App Library stays where it is; the drawer is added alongside it.
-
-## Status
-
-Early release (v0.0.1), not fully tested on a device yet. To try the first build, check the **Actions** tab.
 
 ## Usage
 
@@ -52,6 +47,6 @@ Referenced from the LineageOS Trebuchet `lineage-20.0` source (Apache 2.0): 4 co
 - iOS 15 is the target. iOS 16 and newer have not been fully tested yet.
 
 ## Also
-It was inspired by the Catapult project By Jond-ie Here İs The Link Of The Catapult Project: https://github.com/Jond-ie/catapult
-
-I created this project to test myself (and claude).
+- It was inspired by the Catapult project By Jond-ie Here İs The Link Of The Catapult Project: https://github.com/Jond-ie/catapult
+- if you are poor itz free my friend cuz i have no bank account even if it existed it would still be free.
+- I created this project to test myself (and claude).
