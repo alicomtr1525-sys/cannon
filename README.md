@@ -1,4 +1,4 @@
-# Cannon: Android Launcherının Görünümü İos a Taşındı (Trebuchet İn Görünümü)
+# Cannon: Android Launcherının Görünümünü İos a Taşıma projesi (Trebuchet İn Görünümü)
 
 # Türkçe
 
