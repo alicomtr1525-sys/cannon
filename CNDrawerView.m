@@ -1,5 +1,6 @@
 #import "CNDrawerView.h"
 #import <objc/message.h>
+#import <dlfcn.h>
 
 // ---- Trebuchet (LineageOS lineage-20.0) kaynağından alınan değerler ----
 // res/values/dimens.xml, res/xml/device_profiles.xml, res/layout/search_container_all_apps.xml
@@ -12,6 +13,7 @@ static const CGFloat kSearchHeight = 48.0;    // arama alanı yüksekliği
 static const CGFloat kSearchFontSize = 20.0;  // arama yazısı
 // ---- Bizim tahminlerimiz / cihazda doğrulanacaklar ----
 static const CGFloat kSideInset = 16.0;
+static const CGFloat kSearchIconAreaWidth = 56.0; // büyüteç + yazıya kadar boşluk
 static const CGFloat kSheetCornerRadius = 28.0;
 static const int kIconFormat = 2;             // doğrula: iOS 15'te 60pt ana ekran ikonu için format
 
@@ -105,12 +107,14 @@ static const int kIconFormat = 2;             // doğrula: iOS 15'te 60pt ana ek
         _searchPill = [[UIView alloc] init];
         _searchPill.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.10];
         _searchPill.layer.cornerRadius = kSearchHeight / 2.0;
+        _searchPill.clipsToBounds = YES;
         [_sheet addSubview:_searchPill];
 
-        UIImageView *glass = [[UIImageView alloc] initWithImage:[UIImage systemImageNamed:@"magnifyingglass"]];
+        UIImageSymbolConfiguration *glassCfg = [UIImageSymbolConfiguration configurationWithPointSize:18 weight:UIImageSymbolWeightRegular];
+        UIImageView *glass = [[UIImageView alloc] initWithImage:[UIImage systemImageNamed:@"magnifyingglass" withConfiguration:glassCfg]];
         glass.tintColor = [UIColor colorWithWhite:1.0 alpha:0.6];
-        glass.contentMode = UIViewContentModeScaleAspectFit;
-        glass.frame = CGRectMake(0, 0, 40, kSearchHeight);
+        glass.contentMode = UIViewContentModeCenter; // ölçeklemeden ortala
+        glass.frame = CGRectMake(0, 0, kSearchIconAreaWidth, kSearchHeight);
 
         _searchField = [[UITextField alloc] init];
         _searchField.leftView = glass;
@@ -346,14 +350,30 @@ static const int kIconFormat = 2;             // doğrula: iOS 15'te 60pt ana ek
 
 - (void)collectionView:(UICollectionView *)cv didSelectItemAtIndexPath:(NSIndexPath *)ip {
     NSString *bid = self.shownApps[ip.item][@"bid"];
-    @try {
-        Class wsClass = NSClassFromString(@"LSApplicationWorkspace");
-        id ws = ((id (*)(id, SEL))objc_msgSend)(wsClass, NSSelectorFromString(@"defaultWorkspace"));
-        ((BOOL (*)(id, SEL, id))objc_msgSend)(ws, NSSelectorFromString(@"openApplicationWithBundleID:"), bid);
-    } @catch (NSException *e) {
-        NSLog(@"[Cannon] açılamadı %@: %@", bid, e);
-    }
-    [self settleOpen:NO velocity:0];
+    CFAbsoluteTime t0 = CFAbsoluteTimeGetCurrent();
+    [self settleOpen:NO velocity:0];   // önce çekmeceyi kapat, arayüz hemen tepki versin
+    // Açma isteğini ana thread dışında yap: SpringBoard kendi XPC cevabını ana thread'de işliyorsa
+    // ana thread'den yapılan çağrı beklemeye girebilir (20 sn gecikme şüphesi, doğrulanmadı).
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        BOOL ok = NO;
+        @try {
+            Class wsClass = NSClassFromString(@"LSApplicationWorkspace");
+            id ws = ((id (*)(id, SEL))objc_msgSend)(wsClass, NSSelectorFromString(@"defaultWorkspace"));
+            ok = ((BOOL (*)(id, SEL, id))objc_msgSend)(ws, NSSelectorFromString(@"openApplicationWithBundleID:"), bid);
+        } @catch (NSException *e) {
+            NSLog(@"[Cannon] LS açma hatası %@: %@", bid, e);
+        }
+        NSLog(@"[Cannon] LS openApplication %@ -> %d, %.2f sn", bid, ok, CFAbsoluteTimeGetCurrent() - t0);
+        if (!ok) {
+            // Yedek yol: SpringBoardServices (dlsym ile)
+            void *h = dlopen("/System/Library/PrivateFrameworks/SpringBoardServices.framework/SpringBoardServices", RTLD_LAZY);
+            int (*launch)(CFStringRef, Boolean) = h ? (int (*)(CFStringRef, Boolean))dlsym(h, "SBSLaunchApplicationWithIdentifier") : NULL;
+            if (launch) {
+                int r = launch((__bridge CFStringRef)bid, false);
+                NSLog(@"[Cannon] SBS launch %@ -> %d, %.2f sn", bid, r, CFAbsoluteTimeGetCurrent() - t0);
+            }
+        }
+    });
 }
 
 @end

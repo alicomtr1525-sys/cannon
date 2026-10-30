@@ -10,7 +10,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = Cannon
 
-Cannon_FILES = Tweak.x CNDrawerView.m
+Cannon_FILES = Tweak.x CNDrawerView.m CNScallopClockView.m
 Cannon_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
 Cannon_FRAMEWORKS = UIKit
 

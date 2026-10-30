@@ -17,6 +17,11 @@ static const CGFloat kTravelFraction = 0.9;
 - (BOOL)isEditing;
 @end
 
+@interface SBDockView : UIView
+@property (nonatomic, retain) UIView *backgroundView;
+- (void)setBackgroundAlpha:(double)alpha;
+@end
+
 #pragma mark - Jest
 
 @interface CNPanGestureRecognizer : UIPanGestureRecognizer
@@ -126,6 +131,29 @@ static char kInstalledKey;
     pan.cancelsTouchesInView = NO;
     [host addGestureRecognizer:pan];
     NSLog(@"[Cannon] jest eklendi: %@", host);
+}
+
+%end
+
+
+#pragma mark - Dock arka planını kaldır
+// SBDockView: _backgroundView, _backgroundImageView, _accessibilityBackgroundView ve setBackgroundAlpha:
+// (iOS 15.7.3 başlıkları; 15.8.8'de cihazda doğrulanacak)
+
+%hook SBDockView
+
+- (void)setBackgroundAlpha:(double)alpha {
+    %orig(0.0);
+}
+
+- (void)layoutSubviews {
+    %orig;
+    for (NSString *key in @[@"_backgroundView", @"_backgroundImageView", @"_accessibilityBackgroundView"]) {
+        @try {
+            UIView *v = [self valueForKey:key];
+            if ([v isKindOfClass:[UIView class]]) v.hidden = YES;
+        } @catch (NSException *e) { /* bu sürümde yoksa geç */ }
+    }
 }
 
 %end
