@@ -1,0 +1,39 @@
+name: Build Cannon 7.1
+on:
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: 'Derlenecek klasor (Cannon veya CannonNougat)'
+        required: true
+        default: 'CannonNougat'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Araclari kur
+        run: |
+          brew install ldid dpkg make
+          echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
+
+      - name: Theos kur
+        run: |
+          git clone --recursive https://github.com/theos/theos.git $HOME/theos
+          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+
+      - name: Derle
+        run: |
+          cd "${{ inputs.folder }}"
+          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+          mkdir -p $GITHUB_WORKSPACE/out
+          mv packages/*.deb $GITHUB_WORKSPACE/out/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.folder }}
+          path: out/*.deb
+          if-no-files-found: error
