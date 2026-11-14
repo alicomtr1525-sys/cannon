@@ -1,9 +1,0 @@
-Package: com.cannon.nougat
-Name: Cannon Nougat
-Version: 0.0.1
-Architecture: iphoneos-arm
-Description: Android 7.1 Trebuchet look: transparent dock and app drawer button
-Maintainer: Ali
-Author: Ali
-Section: Tweaks
-Depends: mobilesubstrate
